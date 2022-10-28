@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { Text, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import NoConseil from './NoConseil';
-import styles, {fsRed, fsBlack, fsBlanc, fsBeige} from './Styles';
-import {getGames } from './Utils';
+import styles, {fsRed, fsBlack, fsBlanc, fsBeige} from '../Styles';
+import {getGames } from '../Utils';
 import {GamesList} from './GamesList';
 import {Banniere} from './Banniere'
 

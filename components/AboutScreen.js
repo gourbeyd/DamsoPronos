@@ -4,7 +4,7 @@ import {  Header, Image } from '@rneui/themed';
 import Icon from 'react-native-vector-icons/Feather';
 
 import { Banniere } from './Banniere';
-import styles from './Styles';
+import styles from '../Styles';
 
 
 

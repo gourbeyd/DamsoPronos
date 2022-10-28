@@ -3,8 +3,8 @@ import { useState } from 'react';
 import  {Text, View , ScrollView, Image } from 'react-native';
 import { ListItem, Badge } from '@rneui/themed';
 import { TouchableOpacity } from 'react-native';
-import styles, {fsRed, fsBlack, fsBlanc, fsBeige} from './Styles';
-import {getStats} from './Utils';
+import styles, {fsRed, fsBlack, fsBlanc, fsBeige} from '../Styles';
+import {getStats} from '../Utils';
 import {Banniere} from './Banniere'
 import { Dimensions } from 'react-native';
 

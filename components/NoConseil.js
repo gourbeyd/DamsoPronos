@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Text, View, Image } from 'react-native';
-import styles from './Styles';
+import styles from '../Styles';
 
 
 export default function NoConseil(props) {
@@ -15,7 +15,7 @@ export default function NoConseil(props) {
     return (
         <View style={styles.noConseil}>
         <View style={styles.twitter}>
-            <Image source={require('./football.png')} 
+            <Image source={require('../football.png')} 
                         style={{ width: "45%", 
                                     height: undefined, 
                                     aspectRatio: 1,

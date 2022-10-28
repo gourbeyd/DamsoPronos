@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {  Header } from '@rneui/themed';
 import { TouchableOpacity } from 'react-native';
 
-import styles, {fsRed, fsBlack, fsBlanc, fsBeige} from './Styles';
+import styles, {fsRed, fsBlack, fsBlanc, fsBeige} from '../Styles';
 
 export function Banniere(props){
 
@@ -12,7 +12,7 @@ return (<Header
           containerStyle={styles.header}
           rightComponent={{ icon: 'info', color: '#fff' }}
         >
-          <Image source={require("./letters1024.png")} style={{height: "100%", aspectRatio: 1}}/>
+          <Image source={require("../letters1024.png")} style={{height: "100%", aspectRatio: 1}}/>
           <View style={{ flex: 1, justifyContent: 'center'}}>
             <Text style={{ color: '#fff', textAlignVertical:"center", fontWeight: "bold" }}> DAMSOPRONOS</Text>
           </View> 

@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Text, View , ScrollView, Image } from 'react-native';
 
 import { ListItem, Badge } from '@rneui/themed';
-import styles, {fsRed, fsBlack, fsBlanc, fsBeige} from './Styles';
-import { addPercent} from './Utils';
+import styles, {fsRed, fsBlack, fsBlanc, fsBeige} from '../Styles';
+import { addPercent} from '../Utils';
 
 export function GamesList(props) {
   let vue = props.vue;
