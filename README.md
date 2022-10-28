@@ -1,3 +1,3 @@
-# DamsoPronos - Paris sportifs assistés par intelligence artificielle
+# DamsoPronos - Paris sportifs assistés par intelligence artificielle - Application Mobile
 
 TODO
