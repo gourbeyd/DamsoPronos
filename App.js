@@ -6,9 +6,9 @@ import { enableScreens } from 'react-native-screens';
 // react-native-vector-icons/Ionicons otherwise.
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {fsRed} from './Styles';
-import {PronosScreen} from './PronosScreen';
-import {ResultsScreen} from './ResultsScreen';
-import { AboutScreen } from './AboutScreen';
+import {PronosScreen} from './components/PronosScreen';
+import {ResultsScreen} from './components/ResultsScreen';
+import { AboutScreen } from './components/AboutScreen';
 import SplashScreen from "react-native-splash-screen";
 enableScreens();
 
