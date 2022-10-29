@@ -56,9 +56,24 @@ export async function getResults() {
     }
     else if (prono.conseil==2){
         prono.pronoTexte = prono.AwayTeam + " ne perd pas ou perd d'1 but"
+        prono.OD_AH2 = prono.OD_AH2.toFixed(5).substring(0, 4)
         prono.cote = prono.OD_AH2// to be defined.
         prono.OD_DRAW_OR_AWAY = prono.cote //temporary to put it under
         prono.status=prono.gain>0?"success":"error"
+    }
+    else if (prono.conseil==3){
+        prono.pronoTexte = prono.HomeTeam + " ou nul";
+        prono.OD_AH2 = prono.OD_AH2.toFixed(5).substring(0, 4)
+        prono.cote = prono.OD_AH2;
+        prono.status=prono.gain>0?"success":"error"
+        prono.ODD_HOME=prono.OD_AH2;
+    }
+    else if (prono.conseil==4){
+        prono.pronoTexte = prono.HomeTeam + " DNB";
+        prono.OD_AH2 = prono.OD_AH2.toFixed(5).substring(0, 4)
+        prono.cote = prono.OD_AH2;
+        prono.status=prono.gain>0?"success":"error"
+        prono.ODD_HOME=prono.OD_AH2;
     }
     
     })
@@ -100,6 +115,7 @@ conseils.forEach((prono)=>{
     }
     else if (prono.conseil==2){
         prono.pronoTexte = prono.AwayTeam + " ne perd pas ou perd d'1 but"
+        prono.OD_AH2 = prono.OD_AH2.toFixed(5).substring(0, 4)
         prono.cote = prono.OD_AH2// to be defined.
         prono.OD_DRAW_OR_AWAY = prono.cote //temporary to put it under
         prono.confidence = prono.confidence+10 //boost
@@ -109,6 +125,56 @@ conseils.forEach((prono)=>{
         else{
             prono.status="warning"
         }
+    }
+    else if (prono.conseil==3){
+        prono.pronoTexte = prono.HomeTeam + " ou nul"
+        prono.OD_AH2 = prono.OD_AH2.toFixed(5).substring(0, 4)
+        prono.cote = prono.OD_AH2// to be defined.
+        prono.ODD_HOME = prono.cote //temporary to put it under
+        prono.confidence = prono.confidence+10 //boost
+        if (prono.confidence>65){
+            prono.status="success"
+            }
+        else{
+            prono.status="warning"
+        }
+    }
+    else if (prono.conseil==4){
+        prono.pronoTexte = prono.HomeTeam + " DNB"
+        prono.OD_AH2 = prono.OD_AH2.toFixed(5).substring(0, 4)
+        prono.cote = prono.OD_AH2// to be defined.
+        prono.ODD_HOME = prono.cote //temporary to put it under
+        prono.confidence = prono.confidence+10 //boost
+        if (prono.confidence>65){
+            prono.status="success"
+            }
+        else{
+            prono.status="warning"
+        }
+    }
+})
+conseils.sort((a, b)=> {
+    if (a.month>b.month){
+        return -1
+    }
+    else if (a.month==b.month){
+        if (a.date<b.date){
+            return -1
+        }
+        else if (a.date==b.date){
+            if (a.confidence>b.confidence){
+                return -1
+            }
+            else{
+                return 1
+            }
+        }
+        else{
+            return 1
+        }
+    }
+    else{
+        return 1;
     }
 })
 setGames(conseils)

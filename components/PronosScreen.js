@@ -16,10 +16,9 @@ export function PronosScreen({ navigation, route}) {
     React.useEffect(()=>{
       const fetchData = getGames(setGames)
     }, [])
-  
     let gamesList = <GamesList vue={vue} games={games}></GamesList>
 
-    const countConseils = games.filter(obj => {if (obj.conseil==1 | obj.conseil==2) {return true;}return false;}).length;
+    const countConseils = games.filter(obj => {if (obj.conseil==1 | obj.conseil==2 | obj.conseil==3 | obj.conseil==4) {return true;}return false;}).length;
     if ((games.length==0 && vue == 1) | (countConseils==0 && vue==0)){//si aucun match a affichier
       gamesList = <NoConseil vue={vue}/>;
     }

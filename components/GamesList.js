@@ -12,7 +12,7 @@ export function GamesList(props) {
   let gamesList = <ScrollView key={vue}>
   
   {games.map((game, i) => {
-    if (vue==0 && (game.conseil == 1 | game.conseil==2)){ //afficher seulement les conseils
+    if (vue==0 && (game.conseil == 1 | game.conseil==2 | game.conseil==3 | game.conseil==4)){ //afficher seulement les conseils
     return (<ListItem key={i} bottomDivider topDivider
       Component={View}
       containerStyle = {{ marginLeft: 0,
@@ -52,7 +52,7 @@ export function GamesList(props) {
 
       </ListItem>)
     }
-    else if (vue==1 && game.conseil!=1 && game.conseil!=2){ //afficher toius les matchs
+    else if (vue==1 && game.conseil!=1 && game.conseil!=2 && game.conseil!=3 && game.conseil!=4){ //afficher toius les matchs
       return (
         <ListItem key={i} bottomDivider topDivider
         Component={View}
