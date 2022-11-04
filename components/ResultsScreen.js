@@ -1,17 +1,20 @@
 import * as React from 'react';
 import { useState } from 'react';
-import  {Text, View , ScrollView, Image } from 'react-native';
+import  {Text, View , ScrollView, Image, RefreshControl } from 'react-native';
 import { ListItem, Badge } from '@rneui/themed';
 import { TouchableOpacity } from 'react-native';
 import styles, {fsRed, fsBlack, fsBlanc, fsBeige} from '../Styles';
 import {getStats} from '../Utils';
 import {Banniere} from './Banniere'
 import { Dimensions } from 'react-native';
+import {getGames } from '../Utils';
 
 
 
 export function ResultsScreen({ navigation, route}) {
   var [stats, setStats] = useState({results: [], benefice: 0, nbparis: 0, reussiteTexte: "0/0", reussitePourcentage: " "});
+  const [refreshing, setRefreshing] = React.useState(false);
+
   React.useEffect(()=>{
     const fetchData = getStats(setStats);
   }, [])
@@ -65,7 +68,8 @@ export function ResultsScreen({ navigation, route}) {
               <Text style={{color: "grey"}}> Rés. </Text>
           </ListItem.Content>
         </ListItem>
-      <ScrollView>
+      <ScrollView 
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={()=>getStats(setStats)}/>}>
         {
           stats.results.map((game, i) => {
               return (<ListItem key={i} bottomDivider topDivider

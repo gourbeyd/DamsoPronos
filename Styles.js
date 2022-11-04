@@ -33,7 +33,7 @@ export default styles = StyleSheet.create({
     noConseil:{
       alignItems: "center",
       justifyContent: "space-evenly",
-      height: "75%",
+      height: "100%"
     },
     twitter: {
       alignItems: "center",

@@ -1,15 +1,18 @@
 import * as React from 'react';
-import { Text, View , ScrollView, Image } from 'react-native';
+import { Text, View , ScrollView, Image, RefreshControl } from 'react-native';
 
 import { ListItem, Badge } from '@rneui/themed';
 import styles, {fsRed, fsBlack, fsBlanc, fsBeige} from '../Styles';
 import { addPercent} from '../Utils';
+import {getGames } from '../Utils';
 
 export function GamesList(props) {
   let vue = props.vue;
   let games = props.games;
-
-  let gamesList = <ScrollView key={vue}>
+  const [refreshing, setRefreshing] = React.useState(false);
+  let gamesList = <ScrollView key={vue} refreshControl={
+    <RefreshControl refreshing={refreshing} onRefresh={()=>getGames(props.setGames)}/>
+  }>
   
   {games.map((game, i) => {
     if (vue==0 && (game.conseil == 1 | game.conseil==2 | game.conseil==3 | game.conseil==4)){ //afficher seulement les conseils
@@ -99,7 +102,7 @@ export function GamesList(props) {
   })}
   </ScrollView>;
 
-return <View style={{height: "75%", width: "100%"}}>
+return <View style={{height: "100%", width: "100%"}} >
   <ListItem bottomDivider topDivider 
       Component={View}
       containerStyle = {{ marginLeft: 0,
