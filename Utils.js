@@ -14,6 +14,7 @@ export function getMonth(number){
     return months[number]
 }
     
+
 export async function getResults() {
     const response = await fetch("https://damsopronos.alwaysdata.net/conseilResults");
     const data = await response.json();
@@ -178,6 +179,12 @@ conseils.sort((a, b)=> {
     }
 })
 setGames(conseils)
+}
+
+export async function getGameData(gameId, setGameData){
+    const response = await fetch("https://damsopronos.alwaysdata.net/apiGame/"+gameId);
+    const gameData = await response.json();
+    setGameData(gameData[0]);
 }
   
 export async function getStats(setStats) {

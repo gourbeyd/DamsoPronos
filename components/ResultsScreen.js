@@ -10,7 +10,6 @@ import { Dimensions } from 'react-native';
 import {getGames } from '../Utils';
 
 
-
 export function ResultsScreen({ navigation, route}) {
   var [stats, setStats] = useState({results: [], benefice: 0, nbparis: 0, reussiteTexte: "0/0", reussitePourcentage: " "});
   const [refreshing, setRefreshing] = React.useState(false);
@@ -36,8 +35,8 @@ export function ResultsScreen({ navigation, route}) {
              backgroundColor: "white", 
             height: "100%", width:"49%"}}
         onPress={()=>{stats.reussite==stats.reussiteTexte?setStats({ ...stats, reussite: stats.reussitePourcentage}):setStats({ ...stats, reussite: stats.reussiteTexte})}}>
-           <Text style={{fontWeight: "bold", color:"black"}} > {stats.reussite} </Text>
-           <Text style={{color:"grey"}}> paris réussis </Text>
+      <Text style={{fontWeight: "bold", color:"black"}} > {stats.reussite} </Text>
+      <Text style={{color:"grey"}}> paris réussis </Text>
         </TouchableOpacity>
       </View>
       <View style={{width: "100%", height: 1, backgroundColor: 'lightgrey'}}></View>
@@ -72,7 +71,10 @@ export function ResultsScreen({ navigation, route}) {
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={()=>getStats(setStats)}/>}>
         {
           stats.results.map((game, i) => {
-              return (<ListItem key={i} bottomDivider topDivider
+              return (
+              <TouchableOpacity key={i} activeOpacity={0.8}  onPress={()=>{navigation.navigate("GameScreen", {gameId: game.id, homeImgUrl: game.homeImgUrl, awayImgUrl: game.awayImgUrl, conseilId: stats.results.length-i, game: game})}}>
+                
+              <ListItem  bottomDivider topDivider
                 Component={View}
                 containerStyle = {{ marginLeft: 0,
                   marginRight: 0, 
@@ -120,8 +122,9 @@ export function ResultsScreen({ navigation, route}) {
                   <ListItem.Content style={styles.result} >
                             <Badge value={game.status=="success"?"V":"X"} status={game.status}/>
                             </ListItem.Content>
-                </ListItem>)
- 
+                </ListItem>
+                </TouchableOpacity>)
+
         })
       }
       </ScrollView>
