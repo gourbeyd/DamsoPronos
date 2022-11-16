@@ -197,5 +197,6 @@ setStats({results: results,
             nbwon: stats[0].nbWon,
             reussiteTexte: stats[0].nbWon.toString()+"/"+stats[0].nbparis.toString(), 
             reussitePourcentage: (Math.round(100*100*stats[0].nbWon/stats[0].nbparis)/100).toString()+"%",
-            reussite: stats[0].nbWon.toString()+"/"+stats[0].nbparis.toString()})
+            reussite: stats[0].nbWon.toString()+"/"+stats[0].nbparis.toString(),
+            loading: false});
 }
