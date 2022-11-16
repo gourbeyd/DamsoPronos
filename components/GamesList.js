@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View , ScrollView, Image, RefreshControl } from 'react-native';
+import { Text, View , ScrollView, Image, RefreshControl, TouchableOpacity } from 'react-native';
 
 import { ListItem, Badge } from '@rneui/themed';
 import styles, {fsRed, fsBlack, fsBlanc, fsBeige} from '../Styles';
@@ -9,6 +9,7 @@ import {getGames } from '../Utils';
 export function GamesList(props) {
   let vue = props.vue;
   let games = props.games;
+  let navigation = props.navigation;
   const [refreshing, setRefreshing] = React.useState(false);
   let gamesList = <ScrollView key={vue} refreshControl={
     <RefreshControl refreshing={refreshing} onRefresh={()=>getGames(props.setGames)}/>
@@ -16,7 +17,10 @@ export function GamesList(props) {
   
   {games.map((game, i) => {
     if (vue==0 && (game.conseil == 1 | game.conseil==2 | game.conseil==3 | game.conseil==4)){ //afficher seulement les conseils
-    return (<ListItem key={i} bottomDivider topDivider
+      return (
+      <TouchableOpacity key={i} activeOpacity={0.8}  onPress={()=>{navigation.navigate("GamePronoScreen", {gameId: game.id, homeImgUrl: game.homeImgUrl, awayImgUrl: game.awayImgUrl, game: game})}}>
+        
+      <ListItem key={i} bottomDivider topDivider
       Component={View}
       containerStyle = {{ marginLeft: 0,
         marginRight: 0, 
@@ -53,10 +57,12 @@ export function GamesList(props) {
         <Badge value={addPercent(game.confidence)} status={game.status}/>
         </ListItem.Content>
 
-      </ListItem>)
+      </ListItem>
+      </TouchableOpacity>)
     }
     else if (vue==1 && game.conseil!=1 && game.conseil!=2 && game.conseil!=3 && game.conseil!=4){ //afficher toius les matchs
       return (
+        <TouchableOpacity key={i} activeOpacity={0.8}  onPress={()=>{navigation.navigate("GamePronoScreen", {gameId: game.id, homeImgUrl: game.homeImgUrl, awayImgUrl: game.awayImgUrl, game: game})}}>
         <ListItem key={i} bottomDivider topDivider
         Component={View}
         containerStyle = {{ marginLeft: 0,
@@ -94,7 +100,8 @@ export function GamesList(props) {
           <Badge value={addPercent(game.confidence)} status={game.status}/>
           </ListItem.Content>
 
-        </ListItem>)
+        </ListItem>
+        </TouchableOpacity>)
 
     }
 

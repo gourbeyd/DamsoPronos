@@ -10,6 +10,8 @@ import {PronosScreen} from './components/PronosScreen';
 import {ResultsScreen} from './components/ResultsScreen';
 import { AboutScreen } from './components/AboutScreen';
 import { GameScreen } from './components/GameScreen';
+import { GamePronoScreen } from './components/GamePronoScreen';
+
 
 import SplashScreen from "react-native-splash-screen";
 enableScreens();
@@ -60,6 +62,7 @@ export default function App() {
       <PronosStack.Screen name="Tabs" component={Tabs}/>
       <PronosStack.Screen name="About" component={AboutScreen}/>
       <PronosStack.Screen name="GameScreen" component={GameScreen}/>
+      <PronosStack.Screen name="GamePronoScreen" component={GamePronoScreen}/>
 
     </PronosStack.Navigator>
 
