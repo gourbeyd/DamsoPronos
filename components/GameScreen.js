@@ -80,11 +80,11 @@ export function GameScreen({ navigation: { goBack }, route }){
                 </View>
                 <View style={{width: "10%", justifyContent:"center", alignSelf: "center"}}>
 
-                    <View style={{height: "50%", justifyContent: "flex-end"}}>
+                    <View style={{height: "50%", justifyContent: "flex-end", alignItems: "center"}}>
                         <Text style={[{color: "grey"}, (fromListGame.ODD_HOME==fromListGame.cote)?{color: "white", backgroundColor: "grey", borderRadius: 5}:{}]}> {fromListGame.ODD_HOME} </Text>
-                        </View>
-                        <View style={{height: "50%"}}>
-                        <Text style={[{color: "grey"}, (fromListGame.OD_DRAW_OR_AWAY==fromListGame.cote)?{color: "white", backgroundColor: "grey", borderRadius: 5}:{}]}> {fromListGame.OD_DRAW_OR_AWAY}</Text>
+                    </View>
+                    <View style={{height: "50%", alignItems: "center"}}>
+                        <Text style={[{color: "grey"}, (fromListGame.OD_DRAW_OR_AWAY==fromListGame.cote)?{color: "white", backgroundColor: "grey", borderRadius: 5}:{}]}> {fromListGame.OD_DRAW_OR_AWAY} </Text>
                         </View>
                 </View>
                 <View style={{width: "10%", justifyContent:"center", alignSelf: "center"}}>
@@ -105,24 +105,24 @@ export function GameScreen({ navigation: { goBack }, route }){
                 <View key={i} style={{height: "7%", flexDirection: "column"}}>
                     <View style={{flexDirection: "row"}}>
                         <View style={{width: "10%", alignItems: "center"}}>
-                            <Text style={{color: "black", fontWeight: "400"}}> {gameData["H"+stat]}</Text>
+                            <Text style={{color: "black", fontWeight: "400"}}>{gameData["H"+stat]}</Text>
                         </View>
                         <View style={{width: "80%", alignItems: "center"}}>
                             <Text style={{color: fsBlack}}>{statsTexte[stat]}</Text>
                         </View>
                         <View style={{width: "10%", alignItems: "center"}}>
-                            <Text style={{color: "black", fontWeight: "400"}}> {gameData["A"+stat]}</Text>
+                            <Text style={{color: "black", fontWeight: "400"}}>{gameData["A"+stat]}</Text>
                         </View>
                     </View>
                     
                     <View style={{flexDirection: "row"}}>
                         <View style={{width: "1%"}}>
                         </View>
-                        <View style={{width: "96%", 
+                        <View style={{width: "98%", 
                                       alignItems:"center",
                                       justifyContent: "center",
                                       flexDirection: "row"}}>
-                            <View style={{width: "47.5%", backgroundColor: "lightgrey", borderRadius: 10}}>
+                            <View style={{width: "47%", backgroundColor: "lightgrey", borderRadius: 10}}>
                                 <View style={{width: homeWidth,
                                 height: "50%",
                                 backgroundColor: homeWidth>awayWidth?fsRed:fsBlack, 
@@ -134,7 +134,7 @@ export function GameScreen({ navigation: { goBack }, route }){
                                 </View>
                             </View>
                             <View style={{width: "0.5%", backgroundColor: "white"}}></View>
-                            <View style={{width: "47.5%", backgroundColor: "lightgrey", borderRadius: 10}}>
+                            <View style={{width: "47%", backgroundColor: "lightgrey", borderRadius: 10}}>
                             <View style={{width: awayWidth, height: "50%", 
                                         backgroundColor: homeWidth<awayWidth?fsRed:fsBlack, 
                                         borderRadius: 10, 
@@ -142,6 +142,7 @@ export function GameScreen({ navigation: { goBack }, route }){
                                         borderBottomLeftRadius: 5,
                                         alignSelf:"flex-start"}}>
                                 </View>
+                                <View style={{width: "1%"}}></View>
                             </View>
                         </View>
                         <View style={{width: "1%"}}>
