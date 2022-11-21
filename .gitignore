@@ -62,14 +62,6 @@ buck-out/
 /ios/Pods/
 /vendor/bundle/
 
-# trucs qui trainent
-.buckconfig
-.bundle/
-.eslintrc.js
-.flowconfig
-.prettierrc.js
-.ruby-version
-.watchmanconfig
 
 #build
 android/app/release/app-release.apk
