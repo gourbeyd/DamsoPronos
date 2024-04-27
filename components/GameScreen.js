@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ScrollView, Text, View, TouchableOpacity } from 'react-native';
 import {  Header, Image } from '@rneui/themed';
 import Icon from 'react-native-vector-icons/Feather';
-import styles, {fsRed, fsBlack, fsBlanc, fsBeige} from '../Styles';
+import styles, {fsRed, fsBlack, fsBlanc, fsBeige, sxGreen} from '../Styles';
 import { getGameData } from '../Utils';
 import { ListItem, Badge } from '@rneui/themed';
 
@@ -43,10 +43,10 @@ export function GameScreen({ navigation: { goBack }, route }){
             <Header
             containerStyle={styles.header}
             leftComponent={<TouchableOpacity activeOpacity={0.8} onPress={()=>goBack()}>
-                                <Icon name="arrow-left" color="white" size={30}/>
+                                <Icon name="arrow-left" color={sxGreen} size={30}/>
                             </TouchableOpacity>}
             centerComponent={<View style={{ flex: 1, justifyContent: 'center'}}>
-                                <Text style={{ color: '#fff', textAlignVertical:"center", fontWeight: "bold" }}> CONSEIL #{conseilId} </Text>
+                                <Text style={{ color: "black", textAlignVertical:"center", fontWeight: "bold" }}> CONSEIL #{conseilId} </Text>
                                 </View> 
                                 }
             />
@@ -59,7 +59,7 @@ export function GameScreen({ navigation: { goBack }, route }){
                 </View>
                 <View style={{width: "20%", backgroundColor: fsBlanc, alignItems:"center"}}> 
                             <Text style={{color: fsBlack}}>{fromListGame.date} {fromListGame.month} </Text>
-                            <Text style={{color: fsBlack, alignSelf: 'center'}}>{gameData.gameHour} </Text>
+                            <Text style={{color: fsBlack, alignSelf: 'center'}}>{gameData.hour} </Text>
 
                     <Text style={{color: "black", fontWeight: "bold", fontSize: 30}}>{fromListGame.FTHG} - {fromListGame.FTAG}</Text>
                 </View>

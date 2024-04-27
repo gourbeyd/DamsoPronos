@@ -5,6 +5,8 @@ export const fsBlack = "#2F3538";
 export const fsRed = "#FF0046";
 export const fsBeige = "#FFF2CE";
 export const fsBlanc = "#ffffff";
+export const sxGreen = "#006340";
+
 
 export default styles = StyleSheet.create({
     container: {
@@ -12,10 +14,13 @@ export default styles = StyleSheet.create({
       backgroundColor: '#ffffff',
     },
     header: {
-        backgroundColor: '#2F3538',
+        backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
-        height: "15%"
+        height: "11%",
+        width: "100%",
+        borderBottomColor: "black",
+        borderBottomWidth: 1
     },
     buttonNavUp: {
       alignItems: "center",

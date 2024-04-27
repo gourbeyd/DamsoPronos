@@ -4,24 +4,23 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {  Header } from '@rneui/themed';
 import { TouchableOpacity } from 'react-native';
 
-import styles, {fsRed, fsBlack, fsBlanc, fsBeige} from '../Styles';
+import styles, {fsRed, fsBlack, fsBlanc, fsBeige, sxGreen} from '../Styles';
 
 export function Banniere(props){
 
 return (<Header
           containerStyle={styles.header}
-          rightComponent={{ icon: 'info', color: '#fff' }}
-        >
-          <Image source={require("../letters1024.png")} style={{height: "100%", aspectRatio: 1}}/>
-          <View style={{ flex: 1, justifyContent: 'center'}}>
-            <Text style={{ color: '#fff', textAlignVertical:"center", fontWeight: "bold" }}> DAMSOPRONOS</Text>
-          </View> 
-          <View style={{ flex: 1, justifyContent: 'center'}}>
+          rightComponent={<View style={{display:"flex", flexDirection: "row"}}>
+            <Icon name="" color="black" size={20} style={{marginRight: "10%"}}/>
             <TouchableOpacity activeOpacity={0.8}  onPress={()=>{props.navigation.navigate("About")}}>
-
-            <Icon name="info-outline" color="white" size={30}/>
+              <Icon name="more-vert" color="black" size={20} style={{marginRight: "5%"}}/>
             </TouchableOpacity>
+            </View>}
+        >
+          <View style={{ justifyContent: 'center', display: "flex", flexDirection: "row"}}>
+            <Text style={{ color: 'black', textAlignVertical:"center", fontWeight: "bold" }}> FOOT</Text>
+            <Text style={{ color: sxGreen, textAlignVertical:"center", fontWeight: "bold" }}> X </Text>
+          </View> 
 
-          </View>
         </Header>)
 }

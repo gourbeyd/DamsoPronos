@@ -4,7 +4,7 @@ import {  Header, Image } from '@rneui/themed';
 import Icon from 'react-native-vector-icons/Feather';
 
 import { Banniere } from './Banniere';
-import styles from '../Styles';
+import styles, { sxGreen } from '../Styles';
 
 
 
@@ -14,10 +14,10 @@ export function AboutScreen({ navigation: { goBack } }){
         <Header
           containerStyle={styles.header}
           leftComponent={<TouchableOpacity activeOpacity={0.8} onPress={()=>goBack()}>
-                            <Icon name="arrow-left" color="white" size={30}/>
+                            <Icon name="arrow-left" color={sxGreen} size={30}/>
                         </TouchableOpacity>}
           centerComponent={<View style={{ flex: 1, justifyContent: 'center'}}>
-                            <Text style={{ color: '#fff', textAlignVertical:"center", fontWeight: "bold" }}> A PROPOS</Text>
+                            <Text style={{ color: 'black', textAlignVertical:"center", fontWeight: "bold" }}> A PROPOS</Text>
                             </View> 
                             }
         />

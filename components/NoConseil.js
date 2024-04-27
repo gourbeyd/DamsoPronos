@@ -6,13 +6,7 @@ import styles from '../Styles';
 
 export default function NoConseil(props) {
     let vue = props.vue;
-    let msg="";
-    if (vue==0){
-        msg= " Aucun conseil disponible. "
-    }
-    else{
-        msg = " Analyse des matchs en cours ..."
-    }
+    let msg=props.msg;
     return (
         <View style={styles.noConseil}>
          <View style={styles.twitter}>

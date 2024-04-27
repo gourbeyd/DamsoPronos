@@ -9,19 +9,44 @@ import {Banniere} from './Banniere'
 import { Dimensions } from 'react-native';
 import {getGames } from '../Utils';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
+import {Picker} from '@react-native-picker/picker';
+
 
 export function ResultsScreen({ navigation, route}) {
   var [stats, setStats] = useState({results: [], benefice: 0, nbparis: 0, reussiteTexte: "0/0", reussitePourcentage: " ", loading: true});
   const [refreshing, setRefreshing] = React.useState(false);
+  const [season, setSeason] = React.useState("2324");
 
   React.useEffect(()=>{
-    const fetchData = getStats(setStats);
+    const fetchData = getStats(setStats, season);
   }, [])
+
+  function loadStats(season){
+    setStats({results: [], benefice: 0, nbparis: 0, reussiteTexte: "0/0", reussitePourcentage: " ", loading: true})
+    setSeason(season);
+    getStats(setStats, season)
+  }
   // loop over it to add a resultat attribute
   if (stats.loading){
     return( 
       <View style={styles.container}>
       <Banniere navigation={navigation}/>
+      <View style={{flex: 0, flexDirection: "row", width: "100%", height: "4%"}}>
+        <View style={{justifyContent: "center", height: "100%", width:"100%", borderBottomColor: 'lightgrey',
+      borderBottomWidth: 1, fontWeight: "bold"}}>
+            <Picker
+              selectedValue={season}
+              onValueChange={(itemValue, itemIndex) =>
+                loadStats(itemValue)
+              }
+              style={{fontWeight: "bold", color:"black"}}
+              >
+              <Picker.Item label="2022/2023" value="2223" />
+              <Picker.Item label="2023/2024" value="2324" />
+            </Picker>
+
+        </View>
+      </View>
         <View style={{flex: 0, flexDirection: "row", width: "100%", height: "10%"}}>
         <TouchableOpacity activeOpacity={0.8} style={{justifyContent: "center", alignItems: "center", backgroundColor: "white", height: "100%", width:"49%"}}>
         <SkeletonPlaceholder borderRadius={4}>
@@ -49,7 +74,7 @@ export function ResultsScreen({ navigation, route}) {
           </TouchableOpacity>
         </View>
         <View style={{width: "100%", height: 1, backgroundColor: 'lightgrey'}}></View>
-        <View style={{height: "75%", width: "100%"}}>
+        <View style={{height: "71%", width: "100%"}}>
             <ListItem bottomDivider topDivider 
               Component={View}
               containerStyle = {{ marginLeft: 0,
@@ -94,7 +119,25 @@ export function ResultsScreen({ navigation, route}) {
   return (
     <View style={styles.container}>
     <Banniere navigation={navigation}/>
+    <View style={{flex: 0, flexDirection: "row", width: "100%", height: "4%"}}>
+      <View style={{justifyContent: "center", height: "100%", width:"100%", borderBottomColor: 'lightgrey',
+    borderBottomWidth: 1,}}>
+          <Picker
+            selectedValue={season}
+            onValueChange={(itemValue, itemIndex) =>
+              loadStats(itemValue)
+            }
+            style={{fontWeight: "bold", color:"black",fontSize: 60,}}
+            >
+            <Picker.Item label="2022/2023" value="2223" />
+            <Picker.Item label="2023/2024" value="2324" />
+          </Picker>
+
+      </View>
+
+      </View>
       <View style={{flex: 0, flexDirection: "row", width: "100%", height: "10%"}}>
+
       <TouchableOpacity activeOpacity={0.8} style={{justifyContent: "center", alignItems: "center", backgroundColor: "white", height: "100%", width:"49%"}}>
               <Text style={{fontWeight: "bold", color:"black"}} > {Math.round(100*100*stats.benefice/stats.nbparis)/100}%</Text>
               <Text style={{color:"grey"}}> ROI </Text>
@@ -113,7 +156,7 @@ export function ResultsScreen({ navigation, route}) {
         </TouchableOpacity>
       </View>
       <View style={{width: "100%", height: 1, backgroundColor: 'lightgrey'}}></View>
-      <View style={{height: "75%", width: "100%"}}>
+      <View style={{height: "71%", width: "100%"}}>
           <ListItem bottomDivider topDivider 
             Component={View}
             containerStyle = {{ marginLeft: 0,
@@ -141,7 +184,7 @@ export function ResultsScreen({ navigation, route}) {
           </ListItem.Content>
         </ListItem>
       <ScrollView 
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={()=>getStats(setStats)}/>}>
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={()=>loadStats(season)}/>}>
         {
           stats.results.map((game, i) => {
               return (
@@ -180,15 +223,12 @@ export function ResultsScreen({ navigation, route}) {
                   </ListItem.Content>
                 
                   <ListItem.Content style={styles.gameProno} >
-                  <Text style={{fontWeight: "400", color: "black"}}> {game.pronoTexte} </Text>
+                  <Text style={{fontWeight: "400", color: "black"}}> {game.pronoText} </Text>
                   </ListItem.Content>
                   
                   <ListItem.Content style={styles.gameCote} >
-                    <View style={{height: "50%", justifyContent: "flex-end"}}>
-                      <Text style={[{color: "grey"}, (game.ODD_HOME==game.cote)?{color: "white", backgroundColor: "grey", borderRadius: 5}:{}]}> {game.ODD_HOME} </Text>
-                    </View>
-                    <View style={{height: "50%"}}>
-                      <Text style={[{color: "grey"}, (game.OD_DRAW_OR_AWAY==game.cote)?{color: "white", backgroundColor: "grey", borderRadius: 5}:{}]}> {game.OD_DRAW_OR_AWAY} </Text>
+                    <View style={{height: "100%", justifyContent: "center"}}>
+                      <Text style={[{color: "black"}]}> {game.pronoCote} </Text>
                     </View>
                   </ListItem.Content>
                 

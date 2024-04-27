@@ -15,68 +15,25 @@ export function getMonth(number){
 }
     
 
-export async function getResults() {
-    const response = await fetch("https://damsopronos.alwaysdata.net/conseilResults");
+export async function getResults(season) {
+    const response = await fetch("https://damsopronos.alwaysdata.net/footx/conseilResults?season="+season);
     const data = await response.json();
     data.forEach((prono)=>{
-    let pronoDate = new Date(prono.date);
-    let stake = 100
-    let plus1Date = pronoDate.setDate(pronoDate.getDate() +1)
-    prono.date = new Date(plus1Date);
-    prono.date = prono.date.toISOString().substr(0, 10)
-    let newDate = prono.date.substring(8,10)
-    let month = parseInt(prono.date.substring(5, 7), 10)
-    prono.date = newDate
-    prono.month = getMonth(month)
-    prono.ODD_HOME = prono.ODD_HOME.toFixed(5).substring(0, 4)
-    prono.OD_DRAW_OR_AWAY = prono.OD_DRAW_OR_AWAY.toFixed(5).substring(0, 4)
-    if (prono.conseil==1){// prono classique, vainqueur ou exté ou nul
-        if (prono.prono === prono.resultat){
-            if (prono.prono == -1){
-            prono.resultat = Math.round(stake*(prono.OD_DRAW_OR_AWAY-1)*100)/100
-            }
-            else{
-            prono.resultat = Math.round(stake*(prono.ODD_HOME-1)*100)/100
-            }
-            prono.status = "success";
+        let pronoDate = new Date(prono.date);
+        let stake = 100
+        let plus1Date = pronoDate.setDate(pronoDate.getDate() +1)
+        prono.date = new Date(plus1Date);
+        prono.date = prono.date.toISOString().substr(0, 10)
+        let newDate = prono.date.substring(8,10)
+        let month = parseInt(prono.date.substring(5, 7), 10)
+        prono.date = newDate
+        prono.month = getMonth(month)
+        if (prono.gain>0){
+            prono.status="success"
         }
         else{
-            prono.resultat = -1*stake
-            prono.status = "error"
+            prono.status="error"
         }
-        if (prono.prono == -1 & prono.conseil == 1){
-            prono.prono = "X2"
-            prono.pronoTexte = prono.AwayTeam + " ou nul"
-            prono.cote = prono.OD_DRAW_OR_AWAY
-        }
-        else{
-            prono.prono = "1"
-            prono.pronoTexte = prono.HomeTeam + " vainqueur"
-            prono.cote = prono.ODD_HOME
-        }
-    }
-    else if (prono.conseil==2){
-        prono.pronoTexte = prono.AwayTeam + " ne perd pas ou perd d'1 but"
-        prono.OD_AH2 = prono.OD_AH2.toFixed(5).substring(0, 4)
-        prono.cote = prono.OD_AH2// to be defined.
-        prono.OD_DRAW_OR_AWAY = prono.cote //temporary to put it under
-        prono.status=prono.gain>0?"success":"error"
-    }
-    else if (prono.conseil==3){
-        prono.pronoTexte = prono.HomeTeam + " ou nul";
-        prono.OD_AH2 = prono.OD_AH2.toFixed(5).substring(0, 4)
-        prono.cote = prono.OD_AH2;
-        prono.status=prono.gain>0?"success":"error"
-        prono.ODD_HOME=prono.OD_AH2;
-    }
-    else if (prono.conseil==4){
-        prono.pronoTexte = prono.HomeTeam + " DNB";
-        prono.OD_AH2 = prono.OD_AH2.toFixed(5).substring(0, 4)
-        prono.cote = prono.OD_AH2;
-        prono.status=prono.gain>0?"success":"error"
-        prono.ODD_HOME=prono.OD_AH2;
-    }
-    
     })
     return data
 }
@@ -181,16 +138,23 @@ conseils.sort((a, b)=> {
 setGames(conseils)
 }
 
+
+export async function getFootxGames(setGames, apiDate) {
+    const response = await fetch("https://damsopronos.alwaysdata.net/footx/apiLeagues?date="+apiDate);
+    const gamesByLeague = await response.json();
+    setGames(gamesByLeague);
+}
+
 export async function getGameData(gameId, setGameData){
     const response = await fetch("https://damsopronos.alwaysdata.net/apiGame/"+gameId);
     const gameData = await response.json();
     setGameData(gameData[0]);
 }
   
-export async function getStats(setStats) {
-const response = await fetch("https://damsopronos.alwaysdata.net/conseilStats");
+export async function getStats(setStats, season) {
+const response = await fetch("https://damsopronos.alwaysdata.net/footx/conseilStats?season="+season);
 const stats = await response.json();
-const results = await getResults();
+const results = await getResults(season);
 setStats({results: results, 
             benefice: stats[0].benefice, 
             nbparis: stats[0].nbparis, 
